@@ -6,7 +6,7 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from  instructions import *
 from ruffier import *
-
+from seconds import *
 age = 7
 name = ""
 p1, p2, p3 = 0, 0, 0
@@ -119,7 +119,7 @@ class PulseScr2(Screen):
       super().__init__(**kwargs)
       instr = Label(text=THREE_INSTRUCTION_TEXT)
       line1 = BoxLayout(size_hint=(0.8, None), height='30sp')
-      self.lbl_sec = S(15)
+      self.lbl_sec = Seconds(15)
       self.lbl_sec.bind(done=self.sec_finished)
       self.lbl1 = Label(text='Считайте пульс')
 
@@ -194,7 +194,7 @@ class Result(Screen):
       self.on_enter = self.before
     def before(self):
       global name
-      self.instr.text = name + '\n' + str(p1, p2, p3, age)
+      self.instr.text = name + '\n' + get_heart_performance(get_ruffier_index(p1,p2,p3), age)
 class HeartCheck(App):
     def build(self):
       sm = ScreenManager()
